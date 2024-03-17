@@ -60,4 +60,12 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
 
+    @Override
+    public RestaurantDTO updateRestaurantLocationById(UUID id, RestaurantUpdateRequest request) {
+        Restaurant restaurant = restaurantService.findById(id);
+        restaurant.setLatitude(request.latitude());
+        restaurant.setLongitude(request.longitude());
+        restaurant = restaurantService.save(restaurant);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
 }

@@ -19,4 +19,6 @@ public interface RestaurantControllerContract {
     RestaurantDTO updateRestaurantById(RestaurantUpdateRequest request);
 
     RestaurantDTO updateRestaurantNameById(UUID id, RestaurantUpdateRequest request);
+
+    RestaurantDTO updateRestaurantLocationById(UUID id, RestaurantUpdateRequest request);
 }
