@@ -3,6 +3,7 @@ package com.tarikkamat.restaurantservice.controller;
 import com.tarikkamat.restaurantservice.controller.contract.RestaurantControllerContract;
 import com.tarikkamat.restaurantservice.dto.RestaurantDTO;
 import com.tarikkamat.restaurantservice.request.RestaurantRequest;
+import com.tarikkamat.restaurantservice.request.RestaurantUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,24 @@ public class RestaurantController {
     @GetMapping("/{id}")
     public RestaurantDTO getRestaurantById(@PathVariable("id") UUID id) {
         RestaurantDTO restaurantDTO = restaurantControllerContract.getRestaurantById(id);
+        return restaurantDTO;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRestaurantById(@PathVariable("id") UUID id) {
+        restaurantControllerContract.deleteRestaurantById(id);
+    }
+
+    @PutMapping("/{debugId}")
+    public RestaurantDTO updateRestaurantById(@PathVariable("debugId") UUID debugId, @RequestBody RestaurantUpdateRequest request) {
+        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantById(request);
+        return restaurantDTO;
+    }
+
+    // updateRestaurantNameById
+    @PutMapping("/{id}/name")
+    public RestaurantDTO updateRestaurantNameById(@PathVariable("id") UUID id, @RequestBody RestaurantUpdateRequest request) {
+        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantNameById(id, request);
         return restaurantDTO;
     }
 

@@ -5,6 +5,7 @@ import com.tarikkamat.restaurantservice.dto.RestaurantDTO;
 import com.tarikkamat.restaurantservice.entity.Restaurant;
 import com.tarikkamat.restaurantservice.mapper.RestaurantMapper;
 import com.tarikkamat.restaurantservice.request.RestaurantRequest;
+import com.tarikkamat.restaurantservice.request.RestaurantUpdateRequest;
 import com.tarikkamat.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,5 +40,24 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
 
+    @Override
+    public void deleteRestaurantById(UUID id) {
+        restaurantService.deleteById(id);
+    }
+
+    @Override
+    public RestaurantDTO updateRestaurantById(RestaurantUpdateRequest request) {
+        Restaurant restaurant = RestaurantMapper.INSTANCE.convertToUpdateRestaurant(request);
+        restaurant = restaurantService.save(restaurant);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
+
+    @Override
+    public RestaurantDTO updateRestaurantNameById(UUID id, RestaurantUpdateRequest request) {
+        Restaurant restaurant = restaurantService.findById(id);
+        restaurant.setName(request.name());
+        restaurant = restaurantService.save(restaurant);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
 
 }
