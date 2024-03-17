@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/restaurants")
@@ -20,9 +21,20 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public RestaurantDTO addRestaurant(@RequestBody RestaurantRequest request)
-    {
+    public RestaurantDTO addRestaurant(@RequestBody RestaurantRequest request) {
         RestaurantDTO restaurantDTO = restaurantControllerContract.addRestaurant(request);
+        return restaurantDTO;
+    }
+
+    @GetMapping
+    public List<RestaurantDTO> getAllRestaurants() {
+        List<RestaurantDTO> restaurantDTOs = restaurantControllerContract.getAllRestaurants();
+        return restaurantDTOs;
+    }
+
+    @GetMapping("/{id}")
+    public RestaurantDTO getRestaurantById(@PathVariable("id") UUID id) {
+        RestaurantDTO restaurantDTO = restaurantControllerContract.getRestaurantById(id);
         return restaurantDTO;
     }
 

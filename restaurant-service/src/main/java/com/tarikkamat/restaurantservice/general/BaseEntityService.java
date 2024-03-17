@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -32,6 +33,10 @@ public abstract class BaseEntityService <E extends BaseEntity, R extends JpaRepo
             entity.setBaseAdditionalFields(baseAdditionalFields);
             entity = repository.save(entity);
             return entity;
+        }
+
+        public List<E> findAll() {
+            return repository.findAll();
         }
 
         public E findById(UUID id) {

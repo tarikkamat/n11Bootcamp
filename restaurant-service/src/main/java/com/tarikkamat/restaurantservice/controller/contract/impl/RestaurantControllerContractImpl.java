@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 @Slf4j
@@ -23,5 +26,18 @@ public class RestaurantControllerContractImpl implements RestaurantControllerCon
         restaurant = restaurantService.save(restaurant);
         return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
     }
+
+    @Override
+    public List<RestaurantDTO> getAllRestaurants() {
+        List<Restaurant> restaurants = restaurantService.findAll();
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTOList(restaurants);
+    }
+
+    @Override
+    public RestaurantDTO getRestaurantById(UUID id) {
+        Restaurant restaurant = restaurantService.findById(id);
+        return RestaurantMapper.INSTANCE.convertToRestaurantDTO(restaurant);
+    }
+
 
 }
