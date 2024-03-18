@@ -50,15 +50,15 @@ public class RestaurantController {
         return restaurantDTO;
     }
 
-    @PutMapping("/{id}/name")
-    public RestaurantDTO updateRestaurantNameById(@PathVariable("id") UUID id, @RequestBody RestaurantUpdateRequest request) {
-        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantNameById(id, request);
+    @PutMapping("/{debugId}/name")
+    public RestaurantDTO updateRestaurantNameById(@PathVariable("debugId") UUID id, @RequestBody RestaurantUpdateRequest request) {
+        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantNameById(request);
         return restaurantDTO;
     }
 
     @PutMapping("/{id}/location")
     public RestaurantDTO updateRestaurantLocationById(@PathVariable("id") UUID id, @RequestBody RestaurantUpdateRequest request) {
-        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantLocationById(id, request);
+        RestaurantDTO restaurantDTO = restaurantControllerContract.updateRestaurantLocationById(request);
         return restaurantDTO;
     }
 }
